@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css?family=Caveat');
+*{	padding: 0;
+	margin: 0;
+}
+*{
+	font-family: 'Caveat', cursive;
+	color:black;
+}
+/*A partir de aquí se encuentran los estilos de los elementos
+situados en la barra superior de la página*/
+.header{
+	background:#F7F7F7;
+	width:100%;
+	position: fixed;
+}
+.titulo{
+	text-align: left;
+	float:left;
+	background-image: url("../img/tareas.jpg");
+	margin: 20px;
+	background-size: 100%;
+	width:100px;
+	height:100px;
+	top:0;
+	left: 0;
+}
+.inicio{
+	margin-top:20px;
+	float:left;
+	font-size:60px;
+}
+.informacion{
+	display:flex;
+	flex-direction:row;
+	float: right;
+	margin-top:20px;
+	margin-right:50px;
+}
+.Foto{
+	background-image: url("../img/Interrogacion.png");
+	background-size: 100%;
+	width:100px;
+	height:100px;
+}
+.user{
+	margin-left:30px;
+	display:flex;
+	flex-direction:column;
+}
+.estado{
+	margin-top:35px;
+}
+.BotonD:hover{
+	/*BotonD es el enlace para desconectarse*/
+	color:rgb(255, 0, 0);
+}
+a {
+	text-decoration-line: none;
+}
+header{
+	color:black;
+}
+/*A partir de aquí se encuentran los estilos de los elementos
+situados en la parte izquierda de la página web (donde se 
+encuentran las tareas)*/
+body{
+	color:white;
+	font-size:30px;
+	background-image:url("../img/pizarra.png");
+	background-size: 100%;
+}
+.ContenedorTareas{
+	/*Contiene las tareas*/
+	display:flex;
+	flex-direction: column;
+	float: left;
+	width: 70%;
+	margin-top: 150px;
+}
+.tarea, .tareaFinalizada{
+	/*Estilos que necesitan las tareas y las tareas finalizadas*/
+	color: white;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-top:20px;
+	padding:15px;
+	margin-left:30px;
+	box-shadow: 0 0 60px -5px #ffffff;
+	-webkit-box-shadow: inset 0 0 30px 5px#ffffff;
+	border-radius: 10px;
+}
+.Etiqueta{
+	/*Etiquetas de las tareas*/
+	box-shadow: 0 0 60px -5px #82f7ff;
+	-webkit-box-shadow:  0 0 5px 5px#82f7ff;
+	background-color: #82f7ff;
+	font-size: 20px;
+	font-style: italic;
+	margin-left: 15px;
+	margin-right: 20px;
+}
+.Botones{
+	/*Botones contiene a las etiquetas y al boton de marcar como hecho*/
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+}
+.botonF{
+	/*BotonF es el enlace que para marcar como hecho*/
+	box-shadow: 0 0 60px -5px #4c00ff;
+	-webkit-box-shadow:  0 0 5px 5px#4c00ff;
+	background-color: #4c00ff;
+	font-size: 25px;
+	font-style: italic;
+}
+.botonF:hover{
+	box-shadow: 0 0 60px -5px #ff0000;
+	-webkit-box-shadow:  0 0 5px 5px#ff0000;
+	background-color: #ff0000;
+	font-size:30px;
+}
+.finalizar{
+	/*Contiene a .botonF que es el enlace encargado de marcar como finalizado*/
+	align-items: flex-end;
+}
+.tareaFinalizada{
+	/*Estilos propios de las tareas Finalizadas*/
+	box-shadow: 0 0 60px -5px #ff0000;
+	-webkit-box-shadow: inset 0 0 30px 5px#ff0000;
+	font-size: 30px;
+	text-decoration-line: line-through;
+}
+.botonEliminar{
+	display: flex;
+	background-color: red;
+	color: white;
+	margin-top: 25px;
+	padding:15px;
+	margin-left:300px;
+	border-radius: 60px;
+	width: 300px;
+}
+/*A partir de aquí se encuentran los elementos situados a la derecha de la
+página web, donde se permite añadir nuevas tareas*/
+.Derecha{
+	/*Panel de la derecha donde se añaden tareas*/
+	float: right;
+	height: 500px;
+	width: 305px;
+	background-image: url("../img/hoja.jpg");
+	margin-top: 150px;
+	margin-right: 40px;
+}
+#formTexto{		
+	margin-top: 80px;
+	margin-left: 60px;
+	width: 200px;
+	height: 200px;
+	font-size: 25px;
+}
+#formEnviar{
+	background: #fbff00;
+	font-size: 25px;
+	margin-left: 60px;
+}
+#formEnviar:hover{
+	background-color:black;
+	color:white;
+}

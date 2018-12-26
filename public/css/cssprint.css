@@ -1,0 +1,18 @@
+/*CSS PARA IMPRIMIR*/
+*{	padding: 0;
+	margin: 0;
+}
+.Botones, .finalizar, .header, .Derecha, .botonEliminar{
+	display: none;
+}
+.tarea::before{
+	margin-left: 20px;
+	content: "• ";
+}
+div.tareaFinalizada{
+	margin-left: 30px;
+	text-decoration-line: line-through;
+}
+.ContenedorTareas:before{
+	content: "Lista de tareas";
+}
