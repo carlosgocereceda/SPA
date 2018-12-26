@@ -1,3 +1,23 @@
+let tasks = [
+    {
+        id: 1,
+        text: "Comprar billetes de avión"
+    },
+    {
+        id: 2,
+        text: "Hacer las maletas"
+    },
+    {
+        id: 3,
+        text: "Comprar regalos de reyes"
+    },
+    {
+        id: 4,
+        text: "Reservar coche"
+    }
+];
+
+
 const config = require("./config");
 const DAOTasks = require("./DAOTasks");
 const path = require("path");
@@ -29,29 +49,26 @@ app.set("view engine", "ejs");
 
 app.set("views", path.join(__dirname, "public", "views"));
 
+
+let idCounter = 4;
+
+app.use(bodyParser.json());
+
+app.get("/",function (request, response){
+    response.redirect("/tasks.html");
+});
+
 app.get("/tasks", function (request, response) {
-    // console.log(request);
-    //  response.status(200);
-    daoT.getAllTasks("usuario@ucm.es", function (err, result) {
+    
+    response.json(tasks);
+
+});
+app.get("/deleteCompleted", function (request, response) {
+    daoT.deleteCompleted("usuario@ucm.es", function (err, result) {
         if (err) {
             console.log(err.message);
         }
-        else if (result) {
-     //       console.log(result);
-            response.render("tasks", { tasks: result });
-        }
         else {
-            console.log("Error desconocido");
-        }
-    });
-
-});
-app.get("/deleteCompleted", function(request, response){
-    daoT.deleteCompleted("usuario@ucm.es", function(err,result){
-        if(err){
-            console.log(err.message);
-        }
-        else{
             response.redirect("/tasks");
         }
     })
@@ -60,15 +77,15 @@ app.post("/addTask", function (request, response) {
     let task = createTask(request.body.texto);
     task.done = 0;
     //console.log(task);
-    daoT.insertTask("usuario@ucm.es", task, function(err){
-        if(err){
+    daoT.insertTask("usuario@ucm.es", task, function (err) {
+        if (err) {
             console.log(err.message);
         }
-        else{
+        else {
             response.redirect("/tasks");
         }
     })
-    
+
 });
 app.get("/finish/:taskId", function (request, response) {
     // console.log(request);
@@ -76,11 +93,11 @@ app.get("/finish/:taskId", function (request, response) {
     //console.log("hola");
     //console.log(request.params);
     response.status(200);
-    daoT.markTaskDone(request.params.taskId,function(err){
-        if(!err){
+    daoT.markTaskDone(request.params.taskId, function (err) {
+        if (!err) {
             response.redirect("/tasks");
         }
-        else{
+        else {
             console.log(err);
         }
     })
@@ -119,17 +136,3 @@ app.listen(config.port, function (err) {
         console.log(`Servidor arrancado en el puerto ${config.port}`);
     }
 });
-
-/*let task = {
-    text: "etiqueta para insertar 2",
-    done: 0,
-    tags: ["hola1", "hola2", "hola3"]
-}
-daoT.insertTask("usuario@ucm.es",task, cb_insertTask);
-
-function cb_insertTask(err){
-    if(err){
-        console.log(err.message);
-    }
-}
-*/

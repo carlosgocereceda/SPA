@@ -37,13 +37,9 @@
                             <%= task.text %>
                             <div class="Botones">
 
-                                <% task.tags.forEach(function(tag) { %>
-                                <div class="Etiqueta">
-                                    <%= tag %>
-                                </div>
-                                <% }); %>
-                                
-                                <div class="finalizar"> <a href= "/finish/<%= task.id %>" class="botonF">MARCAR FINALIZADA</a></div>
+
+                                <div class="finalizar"> <a href="/finish/<%= task.id %>" class="botonF">MARCAR
+                                        FINALIZADA</a></div>
                             </div>
                             <% } %>
                 </li>
