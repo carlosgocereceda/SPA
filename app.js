@@ -1,3 +1,4 @@
+let idCounter = 5;
 let tasks = [
     {
         id: 1,
@@ -49,84 +50,61 @@ app.set("view engine", "ejs");
 
 app.set("views", path.join(__dirname, "public", "views"));
 
-
-let idCounter = 4;
-
 app.use(bodyParser.json());
 
-app.get("/",function (request, response){
+app.get("/", function (request, response) {
     response.redirect("/tasks.html");
 });
 
 app.get("/tasks", function (request, response) {
-    
+
     response.json(tasks);
 
 });
-app.get("/deleteCompleted", function (request, response) {
-    daoT.deleteCompleted("usuario@ucm.es", function (err, result) {
-        if (err) {
-            console.log(err.message);
-        }
-        else {
-            response.redirect("/tasks");
-        }
-    })
-});
-app.post("/addTask", function (request, response) {
-    let task = createTask(request.body.texto);
-    task.done = 0;
-    //console.log(task);
-    daoT.insertTask("usuario@ucm.es", task, function (err) {
-        if (err) {
-            console.log(err.message);
-        }
-        else {
-            response.redirect("/tasks");
-        }
-    })
 
-});
-app.get("/finish/:taskId", function (request, response) {
-    // console.log(request);
-    //  response.status(200);
-    //console.log("hola");
-    //console.log(request.params);
-    response.status(200);
-    daoT.markTaskDone(request.params.taskId, function (err) {
-        if (!err) {
-            response.redirect("/tasks");
-        }
-        else {
-            console.log(err);
-        }
-    })
-
-});
-
-let _texto = "";
-function createTask(texto) {
-    let solucion = {
-        text: "",
-        tags: []
-    };
-    let partes = texto.split(" ");
-    let etiquetas = partes.filter(BuscaEtiquetas);
-    partes.filter(BuscaTexto);
-    solucion.tags = etiquetas;
-    solucion.text = _texto;
-    return solucion;
-}
-function BuscaEtiquetas(palabra) {
-    return /@\w+/.test(palabra);
-}
-function BuscaTexto(palabra) {
-    if (!/@\w+/.test(palabra)) {
-        _texto = _texto + palabra + " ";
-        return true;
+app.post("/tasks", function (request, response) {
+    let texto = request.body.texto;
+    let info ={
+        id: idCounter,
+        text: texto
     }
-    else return false;
-}
+    tasks.push(info);
+    idCounter += 1;
+    response.status(200);
+    response.json(info);
+    response.end();
+});
+
+app.delete("/tasks/:id", function(request, response){
+    let indice = Number(request.params.id);
+    if(!isNaN(indice)){
+        let encontrado = false;
+        let pos = 0;
+        //es un número y está dentro del array
+        for(let i = 0; i < tasks.length; i++){
+            console.log("tasks[i].id " +tasks[i].id + " indice " + indice);
+            if(tasks[i].id === indice){
+                encontrado = true;
+                pos = i;
+            }
+        }
+        if(!encontrado){
+            response.status(404);
+        }
+        else{
+            console.log("aqui");
+            tasks.splice(pos, 1);
+            response.status(200);
+            response.end();
+        }
+    }
+    else if(tasks[indice] == undefined){
+        response.status(404);
+    }
+    else{
+        response.status(400);
+    }
+})
 // Arrancar el servidor
 app.listen(config.port, function (err) {
     if (err) {

@@ -113,6 +113,8 @@ body{
 	background-color: #4c00ff;
 	font-size: 25px;
 	font-style: italic;
+	width: 130px;
+	height: 50px;
 }
 .botonF:hover{
 	box-shadow: 0 0 60px -5px #ff0000;
