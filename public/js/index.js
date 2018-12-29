@@ -8,16 +8,6 @@ $(function () {
         onRemoveButtonClick(event);
     });
 
-    /*$("#botonF").on("click", function () {
-        onRemoveButtonClick(event);
-    });*/
-
-
-
-    /*$(".botonF").on("click", function (event) {
-        onRemoveButtonClick(event);
-    });*/
-
     $(".BotonTarea").on("click", function (event) {
         console.log("hola");
         onAddButtonClick(event);
@@ -57,8 +47,6 @@ function onRemoveButtonClick(event) {
     $.ajax({
         method: "DELETE",
         url: "/tasks/" + event.target.value,
-        // En caso de éxito, mostrar el resultado
-        // en el documento HTML
         success: function (data, textStatus, jqXHR) {
 
 
@@ -69,7 +57,6 @@ function onRemoveButtonClick(event) {
             $("#" + event.target.value).remove();
 
         },
-        // En caso de error, mostrar el error producido
         error: function (jqXHR, textStatus, errorThrown) {
             alert("Se ha producido un error: " + errorThrown);
            
@@ -86,17 +73,13 @@ function onAddButtonClick(event) {
             data: {
                 texto: tarea
             },
-            // En caso de éxito, mostrar el resultado
-            // en el documento HTML
             success: function (data, textStatus, jqXHR) {
                 $(listaTareas).append(taskToDOMElement(data));
             },
-            // En caso de error, mostrar el error producido
             error: function (jqXHR, textStatus, errorThrown) {
                 alert("Se ha producido un error: " + errorThrown);
             }
         });
 
     }
-    console.log(tarea);
 }

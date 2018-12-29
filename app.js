@@ -19,8 +19,6 @@ let tasks = [
 ];
 
 
-const config = require("./config");
-const DAOTasks = require("./DAOTasks");
 const path = require("path");
 const mysql = require("mysql");
 const express = require("express");
@@ -40,11 +38,6 @@ const ficherosEstaticos =
 
 app.use(express.static(ficherosEstaticos));
 
-// Crear un pool de conexiones a la base de datos de MySQL
-const pool = mysql.createPool(config.mysqlConfig);
-
-// Crear una instancia de DAOTasks
-const daoT = new DAOTasks(pool);
 
 app.set("view engine", "ejs");
 
@@ -106,11 +99,11 @@ app.delete("/tasks/:id", function(request, response){
     }
 })
 // Arrancar el servidor
-app.listen(config.port, function (err) {
+app.listen(3000, function (err) {
     if (err) {
         console.log("ERROR al iniciar el servidor");
     }
     else {
-        console.log(`Servidor arrancado en el puerto ${config.port}`);
+        console.log(`Servidor arrancado en el puerto 3000`);
     }
 });
